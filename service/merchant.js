@@ -1,4 +1,4 @@
-const Merchant = require("../server/models").Merchant;
+const Merchant = require("../server/models").Merchants;
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
@@ -16,8 +16,11 @@ async function signUp(req, res) {
       },
       { raw: true }
     );
+    console.log(createMerchant)
     res.status(200).json(createMerchant);
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json(error)
+  }
 }
 
 async function signIn(req, res) {

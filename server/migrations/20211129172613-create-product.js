@@ -1,31 +1,34 @@
 "use strict";
+
 module.exports = {
   up: async (queryInterface, Sequelize) => {
+    /**
+     * Add altering commands here.
+     *
+     * Example:
+     * await queryInterface.createTable('users', { id: Sequelize.INTEGER });
+     */
+
     await queryInterface.createTable(
-      "Merchants",
+      "Products",
       {
         id: {
           allowNull: false,
           primaryKey: true,
           type: Sequelize.UUID,
-          defaultValue: Sequelize.UUIDV4
         },
-        username: {
+        merchant_id: {
           type: Sequelize.STRING,
           allowNull: false,
-          unique: true,
         },
-        password: {
+        name: {
           type: Sequelize.STRING,
         },
-        address: {
-          type: Sequelize.STRING,
+        price: {
+          type: Sequelize.INTEGER,
         },
-        join_date: {
-          type: Sequelize.DATE,
-        },
-        phone_number: {
-          type: Sequelize.STRING,
+        quantity: {
+          type: Sequelize.INTEGER,
         },
         createdAt: {
           allowNull: false,
@@ -41,7 +44,14 @@ module.exports = {
       }
     );
   },
+
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.dropTable("Merchants");
+    /**
+     * Add reverting commands here.
+     *
+     * Example:
+     * await queryInterface.dropTable('users');
+     */
+    await queryInterface.dropTable("Products");
   },
 };

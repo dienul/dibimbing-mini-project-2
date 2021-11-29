@@ -1,4 +1,6 @@
+const { v4: uuidv4 } = require('uuid');
 'use strict';
+
 const {
   Model
 } = require('sequelize');
@@ -21,7 +23,9 @@ module.exports = (sequelize, DataTypes) => {
     phone_number: DataTypes.STRING
   }, {
     sequelize,
-    modelName: 'Merchant',
+    modelName: 'Merchants',
   });
+
+  Merchant.beforeCreate(x => x.id = uuidv4());
   return Merchant;
 };
