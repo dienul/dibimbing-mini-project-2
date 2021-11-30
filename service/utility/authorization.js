@@ -4,6 +4,10 @@ const Merchant = require("../../server/models").Merchants;
 async function isAuthorize(req, res, next) {
   try {
     let { access_token, authorization } = req.headers;
+
+    if(!authorization){
+      throw ({ message : "Token tidak ditemukan"})
+    }
     const token = authorization.split(" ")[1]
 
     const decode = await jwt.verify(token, process.env.SECRET);
@@ -20,11 +24,11 @@ async function isAuthorize(req, res, next) {
     if(merchant){
       req.merchant = merchant
     } else {
-      throw new Error('invalid token')
+      throw({message : 'invalid token'})
     }
     next()
   } catch (error) {
-    res.status(401).json(error);
+    res.status(401).json(error.message);
   }
 }
 
