@@ -77,11 +77,11 @@ async function updateProduct(req, res) {
       throw new Error("product tidak ditemukan");
     }
 
-    let dataUpdate = null
-    if(successUpdate){
-      dataUpdate= await Products.findOne(
+    let dataUpdate = null;
+    if (successUpdate) {
+      dataUpdate = await Products.findOne(
         {
-          attributes : ['name', 'quantity', 'price'],
+          attributes: ["name", "quantity", "price"],
           where: {
             id: id,
             merchant_id: merchant.id,
@@ -94,8 +94,8 @@ async function updateProduct(req, res) {
     }
 
     res.status(200).json({
-      update : "Success",
-      data : dataUpdate
+      update: "Success",
+      data: dataUpdate,
     });
   } catch (error) {
     res.status(500).json(error);
@@ -104,6 +104,39 @@ async function updateProduct(req, res) {
 
 async function deleteProduct(req, res) {
   try {
+    const { id } = req.params;
+    const { merchant } = req;
+    const product = await Products.findOne(
+      {
+        where: {
+          id: id,
+          merchant_id: merchant.id,
+        },
+      },
+      {
+        raw: true,
+      }
+    );
+
+    let deleteProduct;
+    if (product) {
+      deleteProduct = await Products.destroy({
+        where: {
+          id: id,
+          merchant_id: merchant.id,
+        },
+      });
+      if(deleteProduct){
+      } else {
+        throw ({message : "Delete product gagal !!"});
+      }
+    } else {
+      throw ({message : "Product tidak ditemukan!!"});
+    }
+    res.status(200).json({
+      delete : "Success",
+      data : product
+    })
   } catch (error) {
     res.status(500).json(error);
   }
