@@ -2,12 +2,22 @@ const Merchant = require("../server/models").Merchants;
 require("dotenv").config();
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const {
+  setCookie,
+  getCookie,
+  eraseCookie,
+} = require("../service/utility/cookie");
 
 async function signUp(req, res) {
   console.log("masuk");
   try {
     const salt = bcrypt.genSaltSync(10);
     const { username, password } = req.body;
+
+    if (username === undefined || password === undefined) {
+      res.status(401).json("usernmae or password required");
+    }
+
     const hash = await bcrypt.hashSync(password, salt);
     const createMerchant = await Merchant.create(
       {
@@ -16,16 +26,21 @@ async function signUp(req, res) {
       },
       { raw: true }
     );
-    console.log(createMerchant)
+    console.log(createMerchant);
     res.status(200).json(createMerchant);
   } catch (error) {
-    res.status(500).json(error)
+    res.status(500).json(error);
   }
 }
 
 async function signIn(req, res) {
   try {
     const { username, password } = req.body;
+
+    if (username === undefined || password === undefined) {
+      res.status(401).json("usernmae or password invalid");
+    }
+
     let token = null;
     const merchant = await Merchant.findOne({
       where: {
@@ -47,16 +62,41 @@ async function signIn(req, res) {
         process.env.SECRET
       );
     } else {
-      res.status(500).json("Ath tidak cocok")
+      res.status(500).json("Ath tidak cocok");
     }
     console.log("token >>", token);
+    // setCookie("username", merchant.username, new Date().getDay());
+    // console.log(getCookie("username"));
     res.status(200).json({
       token: token,
     });
   } catch (error) {}
 }
 
+async function deleteMerchant(req, res) {
+  try {
+    console.log("deleteMerchant >>", req.merchant);
+    const resultDelete = await Merchant.destroy(
+      {
+        where: {
+          id: req.merchant.id,
+        },
+      },
+      {
+        raw: true,
+      }
+    );
+    if (!resultDelete) {
+      throw { message: "Delete product gagal !!" };
+    }
+    res.status(200).json("Merchant berhasil di hapus !!");
+  } catch (error) {
+    res.status(500).json(error.message);
+  }
+}
+
 module.exports = {
   signUp,
   signIn,
+  deleteMerchant,
 };
