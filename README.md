@@ -131,6 +131,8 @@ SECRET=SECRET
 For opening, using app and run :
 $ npm run dev
 
+see documention with swagger :
+http://localhost:4000/api-docs/#
 
 Access the API via http://localhost:4000
 ```
