@@ -1,0 +1,184 @@
+swagger: "2.0"
+info:
+  description: "Ecommerce API"
+  version: "1.0.0"
+  title: "Ecommerce Api"
+host: "localhost:4000"
+tags:
+  - name: "user"
+    description: "Operations about user"
+    externalDocs:
+      description: "Find out more about our store"
+      url: "http://swagger.io"
+paths:
+  /api/merchant/sign-in:
+    post:
+      tags:
+        - "user"
+      summary: "Sign in user"
+      description: ""
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Pet object that needs to be added to the store"
+          required: true
+          schema:
+            $ref: "#/definitions/sign-in"
+      responses:
+        "405":
+          description: "Invalid input"
+  /api/merchant/sign-up:
+    post:
+      tags:
+        - "user"
+      summary: "Signup user"
+      description: ""
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Sign up user"
+          required: true
+          schema:
+            $ref: "#/definitions/sign-in"
+      responses:
+        "405":
+          description: "Invalid input"
+  /api/product:
+    get:
+      tags:
+        - "product"
+      summary: "Get Product"
+      description: "Get product"
+      produces:
+        - "application/xml"
+        - "application/json"
+      responses:
+        "400":
+          description: "Invalid status value"
+      security:
+        - Bearer: []
+    post:
+      tags:
+        - "product"
+      summary: "Update product"
+      description: ""
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "body"
+          description: "Add product"
+          required: true
+          schema:
+            $ref: "#/definitions/product"
+      responses:
+        "405":
+          description: "Invalid input"
+      security:
+        - Bearer: []
+  /api/product/{id}:
+    put:
+      tags:
+        - "product"
+      summary: "Update product"
+      description: ""
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Product id"
+          required: true
+          type: "string"
+        - in: "body"
+          name: "body"
+          description: "Add product"
+          required: true
+          schema:
+            $ref: "#/definitions/product"
+      responses:
+        "405":
+          description: "Invalid input"
+      security:
+        - Bearer: []
+    delete:
+      tags:
+        - "product"
+      summary: "Delete product"
+      description: ""
+      consumes:
+        - "application/json"
+        - "application/xml"
+      produces:
+        - "application/xml"
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "Product id"
+          required: true
+          type: "string"
+      responses:
+        "405":
+          description: "Invalid input"
+      security:
+        - Bearer: []
+securityDefinitions:
+  Bearer:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  sign-in:
+    type: "object"
+    required:
+      - "username"
+      - "password"
+    properties:
+      username:
+        type: "string"
+        example: "admin"
+      password:
+        type: "string"
+        example: "admin"
+
+    xml:
+      name: "Pet"
+  product:
+    type: "object"
+    required:
+      - "name"
+      - "quantity"
+      - "price"
+    properties:
+      name:
+        type: "string"
+        example: "Helm"
+      quantity:
+        type: "number"
+        example: 2
+      price:
+        type: "number"
+        example: 20000000
+    xml:
+      name: "Pet"

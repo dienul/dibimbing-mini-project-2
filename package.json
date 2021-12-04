@@ -1,0 +1,37 @@
+{
+  "name": "dibimbing-mini-project-2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon app.js",
+    "create-database": "sequelize db:create --config=./server/config/config.json",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "migration": "sequelize db:migrate --config=./server/config/config.json",
+    "build": "bash build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dienul/dibimbing-mini-project-2.git"
+  },
+  "author": "Dienul Haq",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/dienul/dibimbing-mini-project-2/issues"
+  },
+  "homepage": "https://github.com/dienul/dibimbing-mini-project-2#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.6",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.12.0-alpha.1",
+    "swagger-ui-express": "^4.2.0",
+    "uuid": "^8.3.2",
+    "yamljs": "^0.3.0"
+  }
+}
