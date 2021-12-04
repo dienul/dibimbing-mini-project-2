@@ -12,10 +12,10 @@ async function signUp(req, res) {
   console.log("masuk");
   try {
     const salt = bcrypt.genSaltSync(10);
-    const { username, password } = req.body;
+    const { username, password, address , phone_number } = req.body;
 
-    if (username === undefined || password === undefined) {
-      res.status(401).json("usernmae or password required");
+    if (username === undefined || password === undefined || username ==="" || password == "") {
+      throw ("usernmae or password required");
     }
 
     const hash = await bcrypt.hashSync(password, salt);
@@ -23,6 +23,9 @@ async function signUp(req, res) {
       {
         username: username,
         password: hash,
+        address : address,
+        join_date : new Date().toDateString(),
+        phone_number : phone_number
       },
       { raw: true }
     );

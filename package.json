@@ -4,8 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon app.js",
+    "create-database": "sequelize db:create --config=./server/config/config.json",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "run-migration": "sequelize db:migrate --config=./server/config/config.json"
+    "migration": "sequelize db:migrate --config=./server/config/config.json",
+    "build": "bash build.sh"
   },
   "repository": {
     "type": "git",
@@ -27,6 +30,8 @@
     "morgan": "^1.10.0",
     "mysql2": "^2.3.3",
     "sequelize": "^6.12.0-alpha.1",
-    "uuid": "^8.3.2"
+    "swagger-ui-express": "^4.2.0",
+    "uuid": "^8.3.2",
+    "yamljs": "^0.3.0"
   }
 }
