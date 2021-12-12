@@ -38,10 +38,13 @@ async function signUp(req, res) {
 
 async function signIn(req, res) {
   try {
+    console.log('body >>', req.body)
     const { username, password } = req.body;
 
     if (username === undefined || password === undefined) {
-      res.status(401).json("usernmae or password invalid");
+      res.status(401).json({
+        message : "usernmae or password invalid"
+      });
     }
 
     let token = null;
