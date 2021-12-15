@@ -43,7 +43,7 @@ export default function Auth() {
             aria-expanded="false"
           >
             <img
-              src={user.avatar}
+              // src={user.avatar}
               className="rounded-circle"
               width="40"
               height="40"

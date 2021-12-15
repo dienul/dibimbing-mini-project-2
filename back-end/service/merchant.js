@@ -12,10 +12,15 @@ async function signUp(req, res) {
   console.log("masuk");
   try {
     const salt = bcrypt.genSaltSync(10);
-    const { username, password, address , phone_number } = req.body;
+    const { username, password, address, phone_number } = req.body;
 
-    if (username === undefined || password === undefined || username ==="" || password == "") {
-      throw ("usernmae or password required");
+    if (
+      username === undefined ||
+      password === undefined ||
+      username === "" ||
+      password == ""
+    ) {
+      throw "usernmae or password required";
     }
 
     const hash = await bcrypt.hashSync(password, salt);
@@ -23,27 +28,35 @@ async function signUp(req, res) {
       {
         username: username,
         password: hash,
-        address : address,
-        join_date : new Date().toDateString(),
-        phone_number : phone_number
+        address: address,
+        join_date: new Date().toDateString(),
+        phone_number: phone_number,
       },
       { raw: true }
     );
-    console.log(createMerchant);
-    res.status(200).json(createMerchant);
+
+    res.status(200).json({
+      status: 200,
+      data: {
+        token: createMerchant,
+      },
+    });
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({
+      error: true,
+      message: error.message,
+    });
   }
 }
 
 async function signIn(req, res) {
   try {
-    console.log('body >>', req.body)
+    console.log("body >>", req.body);
     const { username, password } = req.body;
 
     if (username === undefined || password === undefined) {
       res.status(401).json({
-        message : "usernmae or password invalid"
+        message: "usernmae or password invalid",
       });
     }
 
@@ -53,6 +66,12 @@ async function signIn(req, res) {
         username: username,
       },
     });
+    console.log("merchant >>", merchant);
+    if (!merchant) {
+      res.status(401).json({
+        message: "merchant tidak di temukan",
+      });
+    }
     const comparePassword = await bcrypt.compareSync(
       password.toString(),
       merchant.password
@@ -74,9 +93,15 @@ async function signIn(req, res) {
     // setCookie("username", merchant.username, new Date().getDay());
     // console.log(getCookie("username"));
     res.status(200).json({
+      status: 200,
       token: token,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.status(500).json({
+      error: true,
+      message: error.message,
+    });
+  }
 }
 
 async function deleteMerchant(req, res) {

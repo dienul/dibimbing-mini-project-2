@@ -33,7 +33,8 @@ export interface NominalsTypes {
 }
 
 export interface LoginTypes {
-    email: string;
+    username?:string,
+    email?: string;
     password: string;
 }
 

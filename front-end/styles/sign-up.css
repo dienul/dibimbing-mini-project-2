@@ -30,6 +30,9 @@
     background-color: #E7EAF5;
 }
 
+.invalid-feedback {
+    display: block !important;
+}
 
 .sign-up .button-group{
     width: 100%;

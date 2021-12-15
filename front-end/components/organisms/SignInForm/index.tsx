@@ -13,7 +13,7 @@ export default function SignInForm() {
 
   const onSubmit = async () => {
     const data = {
-      email,
+      username : email,
       password,
     };
 
@@ -21,6 +21,7 @@ export default function SignInForm() {
       toast.error('Email dan Password wajib diisi!!!');
     } else {
       const response = await setLogin(data);
+      console.log('response >>', response)
       if (response.error) {
         toast.error(response.message);
       } else {

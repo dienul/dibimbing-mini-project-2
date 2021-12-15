@@ -23,12 +23,15 @@ export default async function callAPI({
       };
     }
   }
+  console.log( url, method, data, token, serverToken)
   const response = await axios({
     url,
     method,
     data,
     headers,
   }).catch((err) => err.response);
+
+  console.log('response >>', response)
 
   if (response.status > 300) {
     const res = {
