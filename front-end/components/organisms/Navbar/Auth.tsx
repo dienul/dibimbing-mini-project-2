@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import Cookies from 'js-cookie';
@@ -27,7 +28,7 @@ export default function Auth() {
     Cookies.remove('token');
     router.push('/');
     setIsLogin(false);
-  };
+  }; 
 
   if (isLogin) {
     return (
@@ -53,6 +54,7 @@ export default function Auth() {
 
           <ul className="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
             <li><Link href="/member"><a className="dropdown-item text-lg color-palette-2">My Profile</a></Link></li>
+            <li><Link href="/product/add-product"><a className="dropdown-item text-lg color-palette-2">Tambah Produk</a></Link></li>
             <li><Link href="/"><a className="dropdown-item text-lg color-palette-2" href="#">Wallet</a></Link></li>
             <li>
               <Link href="/member/edit-profile"><a className="dropdown-item text-lg color-palette-2" href="#">Account Settings</a></Link>

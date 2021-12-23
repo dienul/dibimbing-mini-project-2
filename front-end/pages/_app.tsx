@@ -1,9 +1,16 @@
+/* eslint-disable @next/next/no-page-custom-font */
+/* eslint-disable @next/next/no-sync-scripts */
 import '../styles/globals.css'
 import '../styles/utilities.css';
 import '../styles/homepage.css';
 import '../styles/navbar-log-in.css';
 import '../styles/sign-in.css';
 import '../styles/sign-up.css';
+import '../styles/404-not-found.css';
+import '../styles/sidebar.css';
+import '../styles/overview.css';
+import '../styles/transactions.css';
+import '../styles/transactions-detail.css';
 import Head from 'next/head';
 import type { AppProps } from 'next/app'
 import { ToastContainer } from 'react-toastify';

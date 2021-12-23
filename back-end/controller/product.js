@@ -6,10 +6,11 @@ const {
   addProduct,
   updateProduct,
   deleteProduct,
+  getAllProducts
 } = require("../service/product");
 
+router.get("/", getAllProducts);
 router.use(isAuthorize);
-router.get("/", getProduct);
 router.post("/", addProduct);
 router.delete("/:id", deleteProduct);
 router.put("/:id", updateProduct);

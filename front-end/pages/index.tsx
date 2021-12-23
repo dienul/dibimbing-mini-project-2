@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Head from 'next/head';
 import Navbar from '../components/organisms/Navbar';
 // import MainBanner from '../components/organisms/MainBanner';
-// import TransactionStep from '../components/organisms/TransactionStep';
+import TransactionStep from '../components/organisms/TransactionStep';
 // import FeaturedGame from '../components/organisms/FeaturedGame';
 // import Reached from '../components/organisms/Reached';
 // import Story from '../components/organisms/Story';
@@ -21,7 +21,7 @@ export default function Home() {
       </Head>
       <Navbar />
       {/* <MainBanner /> */}
-      {/* <TransactionStep /> */}
+      <TransactionStep />
       {/* <FeaturedGame /> */}
       {/* <Reached /> */}
       {/* <Story /> */}

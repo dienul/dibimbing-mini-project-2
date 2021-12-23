@@ -1,6 +1,18 @@
 const Products = require("../server/models").Products;
 
+async function getAllProducts(req,res){
+  try {
+    const products = await Products.findAll()
+    res.status(200).json(products)
+  } catch (error) {
+    res.status(500).json({
+      message : error.message
+    });
+  }
+}
+
 async function getProduct(req, res) {
+  console.log('MASUK getProduct')
   try {
     const { merchant } = req;
     const products = await Products.findAll(
@@ -15,7 +27,9 @@ async function getProduct(req, res) {
     );
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json(error);
+    res.status(500).json({
+      message : error.message
+    });
   }
 }
 
@@ -147,4 +161,5 @@ module.exports = {
   addProduct,
   updateProduct,
   deleteProduct,
+  getAllProducts
 };
