@@ -1,4 +1,5 @@
 const express = require("express");
+var cors = require('cors')
 const app = express();
 const logger = require("morgan");
 const bodyParser = require("body-parser");
@@ -13,7 +14,7 @@ app.use(logger("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 
-
+app.use(cors())
 const swaggerUi = require('swagger-ui-express');
 const YAML = require('yamljs');
 const swaggerDocument = YAML.load('./swagger.yaml');
