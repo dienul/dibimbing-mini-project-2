@@ -80,6 +80,7 @@ async function signIn(req, res) {
     if (comparePassword) {
       token = await jwt.sign(
         {
+          id : merchant.id,
           username: merchant.username,
           address: merchant.address,
           phone_number: merchant.phone_number,

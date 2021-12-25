@@ -1,11 +1,12 @@
 /* eslint-disable @next/next/no-img-element */
 import { useCallback, useEffect, useState } from 'react';
-import { getProducts } from '../../../services/product'
+import { getProducts, getProductSearch } from '../../../services/product'
 import cx from 'classnames';
 
 
 export default function TransactionStep() {
   const [productList, setProductList] = useState([])
+  const [name, setName] = useState("")
 
   const className = {
     label: cx('form-label text-lg fw-medium color-palette-1 mb-10'),
@@ -19,6 +20,16 @@ export default function TransactionStep() {
   useEffect(() => {
     getProductList();
   }, [])
+
+  const onSearch = async () => {
+    console.log('onSearch berjalan')
+    if(name !== ""){
+      const res : any = await getProductSearch(name)
+      setProductList(res.data)
+    } else {
+      getProductList()
+    }
+  }
 
   return (
     <section id="feature" className="feature pt-50 pb-50">
@@ -41,19 +52,20 @@ export default function TransactionStep() {
                     className="form-control rounded-pill text-lg"
                     aria-describedby="name"
                     placeholder="Nama Produk"
+                    onChange={(event)=> setName(event.target.value)}
                   />
                 </div>
                 <div className="col-lg-4">
-                  <button type="button" className="btn btn-feature fw-medium text-lg text-white rounded-pill">Search</button>
+                  <button type="button" className="btn btn-feature fw-medium text-lg text-white rounded-pill" onClick={onSearch}>Search</button>
                 </div>
               </div>
             </form>
           </div>
         </section>
         <div className="row gap-lg-0 gap-4">
-          {productList.map((item: any) => (
+          { productList && productList.map((item: any) => (
             // eslint-disable-next-line react/jsx-key
-            <div className="col-lg-4">
+            <div className="col-lg-2" key={item.id}>
               <div className="card feature-card border-0 mb-5">
                 <img src='/no-picture.png' alt="icon step" className="mb-30" width={80} height={80} />
                 <p className="fw-semibold text-2xl mb-2 color-palette-1">{item.name}</p>

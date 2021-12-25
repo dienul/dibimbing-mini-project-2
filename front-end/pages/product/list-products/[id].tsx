@@ -1,9 +1,13 @@
 import { useEffect } from 'react';
+import { useRouter } from 'next/router'
 import Head from 'next/head';
-import Navbar from '../components/organisms/Navbar';
-import TransactionStep from '../components/organisms/TransactionStep';
+import Navbar from '../../../components/organisms/Navbar';
+import TransactionStep from '../../../components/organisms/TransactionStep';
+import ListProducts from '../../../components/organisms/ListProduct';
 
-export default function Home() {
+export default function ListProductsPage() {
+  const router = useRouter()
+  const { id } = router.query;
   return (
     <>
       <Head>
@@ -15,12 +19,7 @@ export default function Home() {
         <meta property="og:url" content="https://storegg.com" />
       </Head>
       <Navbar />
-      {/* <MainBanner /> */}
-      <TransactionStep />
-      {/* <FeaturedGame /> */}
-      {/* <Reached /> */}
-      {/* <Story /> */}
-      {/* <Footer /> */}
+      <ListProducts id={id} />
     </>
-  );
+  )
 }

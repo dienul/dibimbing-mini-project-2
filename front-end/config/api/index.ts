@@ -23,7 +23,6 @@ export default async function callAPI({
       };
     }
   }
-  console.log( url, method, data, token, serverToken)
   const response = await axios({
     url,
     method,
@@ -31,7 +30,7 @@ export default async function callAPI({
     headers,
   }).catch((err) => err.response);
 
-  console.log('response >>', response)
+  console.log('response >', response)
 
   if (response.status > 300) {
     const res = {
@@ -43,10 +42,11 @@ export default async function callAPI({
   }
 
   const { length } = Object.keys(response.data);
+  console.log('length >', length)
   const res = {
     error: false,
     message: 'success',
-    data: length > 1 ? response.data : response.data.data,
+    data: length > 0 ? response.data : response.data.data,
   };
 
   return res;

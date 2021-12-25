@@ -1,24 +1,54 @@
 const Products = require("../server/models").Products;
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op
 
-async function getAllProducts(req,res){
+async function getAllProducts(req, res) {
   try {
     const products = await Products.findAll()
     res.status(200).json(products)
   } catch (error) {
     res.status(500).json({
-      message : error.message
+      message: error.message
     });
   }
 }
 
 async function getProduct(req, res) {
   console.log('MASUK getProduct')
+  const { name } =req.params
   try {
     const { merchant } = req;
     const products = await Products.findAll(
       {
         where: {
-          merchant_id: merchant.id,
+          name: {
+            [Op.like] : `%${name}%`
+          },
+        },
+      },
+      {
+        raw: true,
+      }
+    );
+    res.status(200).json({
+      data : products
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message
+    });
+  }
+}
+
+async function getById(req,res){
+  console.log('SERVICE getBYId')
+  try {
+    console.log('param >', req.params)
+    const { id } = req.params
+    const products = await Products.findOne(
+      {
+        where: {
+          id: id,
         },
       },
       {
@@ -27,9 +57,7 @@ async function getProduct(req, res) {
     );
     res.status(200).json(products);
   } catch (error) {
-    res.status(500).json({
-      message : error.message
-    });
+    res.status(500).json(error);
   }
 }
 
@@ -120,6 +148,8 @@ async function deleteProduct(req, res) {
   try {
     const { id } = req.params;
     const { merchant } = req;
+    console.log(id)
+    console.log(merchant.id)
     const product = await Products.findOne(
       {
         where: {
@@ -140,19 +170,44 @@ async function deleteProduct(req, res) {
           merchant_id: merchant.id,
         },
       });
-      if(deleteProduct){
+      if (deleteProduct) {
       } else {
-        throw ({message : "Delete product gagal !!"});
+        throw ({ message: "Delete product gagal !!" });
       }
     } else {
-      throw ({message : "Product tidak ditemukan!!"});
+      throw ({ message: "Product tidak ditemukan!!" });
     }
     res.status(200).json({
-      delete : "Success",
-      data : product
+      delete: true,
+      data: product
     })
   } catch (error) {
+    console.log(error)
     res.status(500).json(error);
+  }
+}
+
+async function getProductByMerchant(req, res) {
+  try {
+    console.log('MASUK SERVICE')
+    console.log(req.params)
+    const { merchantId } = req.params
+    const getProductByMerchant = await Products.findAll({
+      where: {
+        merchant_id: merchantId
+      }
+    }, {
+      raw : true
+    })
+    console.log('getProductByMerchant >', getProductByMerchant)
+    res.status(200).json({
+      data : getProductByMerchant
+    })
+  } catch (error) {
+    console.log('error >', error)
+    res.status(500).json({
+      message : error.message
+    })
   }
 }
 
@@ -161,5 +216,7 @@ module.exports = {
   addProduct,
   updateProduct,
   deleteProduct,
-  getAllProducts
+  getAllProducts,
+  getProductByMerchant,
+  getById
 };

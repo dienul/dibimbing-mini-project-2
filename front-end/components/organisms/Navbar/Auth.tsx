@@ -9,7 +9,7 @@ import { JWTPayloadTypes, UserTypes } from '../../../services/data-types';
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({
-    avatar: '',
+    id: '',
   });
   const router = useRouter();
 
@@ -18,7 +18,8 @@ export default function Auth() {
     if (token) {
       const jwtToken = atob(token);
       const payload: JWTPayloadTypes = jwtDecode(jwtToken);
-      const userFromPayload: UserTypes = payload.player;
+      const userFromPayload: any = payload;
+      console.log('userFromPayload >>', userFromPayload)
       setIsLogin(true);
       setUser(userFromPayload);
     }
@@ -55,10 +56,11 @@ export default function Auth() {
           <ul className="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
             <li><Link href="/member"><a className="dropdown-item text-lg color-palette-2">My Profile</a></Link></li>
             <li><Link href="/product/add-product"><a className="dropdown-item text-lg color-palette-2">Tambah Produk</a></Link></li>
-            <li><Link href="/"><a className="dropdown-item text-lg color-palette-2" href="#">Wallet</a></Link></li>
-            <li>
+            <li><Link href={`/product/list-products/${user?.id}`}><a className="dropdown-item text-lg color-palette-2">Daftar Produk</a></Link></li>
+            {/* <li><Link href="/"><a className="dropdown-item text-lg color-palette-2" href="#">Wallet</a></Link></li> */}
+            {/* <li>
               <Link href="/member/edit-profile"><a className="dropdown-item text-lg color-palette-2" href="#">Account Settings</a></Link>
-            </li>
+            </li> */}
             <li onClick={onLogout}><a className="dropdown-item text-lg color-palette-2" href="#">Log Out</a></li>
           </ul>
         </div>

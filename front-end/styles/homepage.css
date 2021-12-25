@@ -82,6 +82,26 @@
 }
 /*  */
 
+/* product */
+.product .product-card{
+    background-color: #F9FAFF;
+    padding: 1.875rem;
+    border-radius: 1.625rem;
+    margin-right: 16px;
+}
+
+.product .btn-product{
+    padding: -0.25rem;
+    background-color: #4D17E2;
+}
+
+.product .btn-product-width{
+    width: 100%;
+    padding: -0.25rem;
+    background-color: #4D17E2;
+}
+/*  */
+
 
 /* Featured Game */
 .featured-game .overflow-setting{

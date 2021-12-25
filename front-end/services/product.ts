@@ -12,6 +12,16 @@ export async function getProducts(){
   })
 }
 
+export async function getProductById(id:string) {
+  const url = `${ROOT_API}/${API_VERSION}/product/${id}`
+  
+  return callAPI({
+    url,
+    method : 'GET',
+    token : true
+  })
+}
+
 export async function addProduct(data :FormData){
   const url = `${ROOT_API}/${API_VERSION}/product`
 
@@ -41,5 +51,24 @@ export async function deleteProduct(id:string){
     url,
     method: 'DELETE',
     token : true
+  })
+}
+
+export async function getProductByMerchant(id : string){
+  const url = `${ROOT_API}/${API_VERSION}/product/merchant/${id}`
+
+  return callAPI({
+    url,
+    method: 'GET',
+    token : true
+  })
+}
+
+export async function getProductSearch(name : string){
+  const url = `${ROOT_API}/${API_VERSION}/product/search/${name}`
+
+  return callAPI({
+    url,
+    method: 'GET',
   })
 }
