@@ -16,10 +16,6 @@ export default function Navbar() {
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto text-lg gap-lg-0 gap-2">
               <Menu title="Home" active />
-              <Menu title="Games" href="/games" />
-              <Menu title="Reward" />
-              <Menu title="Discover" />
-              <Menu title="Global Rank" />
               <Auth />
             </ul>
           </div>

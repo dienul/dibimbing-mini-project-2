@@ -25,7 +25,7 @@ export default function TransactionStep() {
     console.log('onSearch berjalan')
     if(name !== ""){
       const res : any = await getProductSearch(name)
-      setProductList(res.data)
+      setProductList(res.data.data)
     } else {
       getProductList()
     }

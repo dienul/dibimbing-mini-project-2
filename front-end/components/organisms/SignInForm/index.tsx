@@ -37,10 +37,10 @@ export default function SignInForm() {
   return (
     <>
       <h2 className="text-4xl fw-bold color-palette-1 mb-10">Sign In</h2>
-      <p className="text-lg color-palette-1 m-0">Masuk untuk melakukan proses top up</p>
+      <p className="text-lg color-palette-1 m-0">Daftarkan diri anda di marketplace kami</p>
       <div className="pt-50">
         <label className="form-label text-lg fw-medium color-palette-1 mb-10">
-          Email Address
+          Username
         </label>
         <input
           type="email"

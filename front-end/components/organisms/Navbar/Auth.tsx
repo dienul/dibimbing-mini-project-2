@@ -45,7 +45,7 @@ export default function Auth() {
             aria-expanded="false"
           >
             <img
-              // src={user.avatar}
+              src='no-picture.png'
               className="rounded-circle"
               width="40"
               height="40"
@@ -54,7 +54,7 @@ export default function Auth() {
           </a>
 
           <ul className="dropdown-menu border-0" aria-labelledby="dropdownMenuLink">
-            <li><Link href="/member"><a className="dropdown-item text-lg color-palette-2">My Profile</a></Link></li>
+            {/* <li><Link href="/member"><a className="dropdown-item text-lg color-palette-2">My Profile</a></Link></li> */}
             <li><Link href="/product/add-product"><a className="dropdown-item text-lg color-palette-2">Tambah Produk</a></Link></li>
             <li><Link href={`/product/list-products/${user?.id}`}><a className="dropdown-item text-lg color-palette-2">Daftar Produk</a></Link></li>
             {/* <li><Link href="/"><a className="dropdown-item text-lg color-palette-2" href="#">Wallet</a></Link></li> */}
